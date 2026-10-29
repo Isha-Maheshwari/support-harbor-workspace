@@ -10,33 +10,349 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivityLogRouteImport } from './routes/activity-log'
+import { Route as CustomersIndexRouteImport } from './routes/customers.index'
+import { Route as CustomersNewRouteImport } from './routes/customers.new'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
+import { Route as KnowledgeBaseIndexRouteImport } from './routes/knowledge-base.index'
+import { Route as KnowledgeBaseNewRouteImport } from './routes/knowledge-base.new'
+import { Route as ReportsIndexRouteImport } from './routes/reports.index'
+import { Route as ReportsAgentsRouteImport } from './routes/reports.agents'
+import { Route as ReportsTicketsRouteImport } from './routes/reports.tickets'
+import { Route as SlaBreachesRouteImport } from './routes/sla.breaches'
+import { Route as SlaPoliciesRouteImport } from './routes/sla.policies'
+import { Route as TeamIndexRouteImport } from './routes/team.index'
+import { Route as TeamIdRouteImport } from './routes/team.$id'
+import { Route as TicketsIndexRouteImport } from './routes/tickets.index'
+import { Route as TicketsAssignedRouteImport } from './routes/tickets.assigned'
+import { Route as TicketsEscalationsRouteImport } from './routes/tickets.escalations'
+import { Route as TicketsNewRouteImport } from './routes/tickets.new'
+import { Route as CustomersIdIndexRouteImport } from './routes/customers.$id.index'
+import { Route as CustomersIdEditRouteImport } from './routes/customers.$id.edit'
+import { Route as KnowledgeBaseIdIndexRouteImport } from './routes/knowledge-base.$id.index'
+import { Route as KnowledgeBaseIdEditRouteImport } from './routes/knowledge-base.$id.edit'
+import { Route as TicketsIdIndexRouteImport } from './routes/tickets.$id.index'
+import { Route as TicketsIdEditRouteImport } from './routes/tickets.$id.edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActivityLogRoute = ActivityLogRouteImport.update({
+  id: '/activity-log',
+  path: '/activity-log',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomersIndexRoute = CustomersIndexRouteImport.update({
+  id: '/customers/',
+  path: '/customers/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomersNewRoute = CustomersNewRouteImport.update({
+  id: '/customers/new',
+  path: '/customers/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
+  id: '/dashboard/analytics',
+  path: '/dashboard/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeBaseIndexRoute = KnowledgeBaseIndexRouteImport.update({
+  id: '/knowledge-base/',
+  path: '/knowledge-base/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeBaseNewRoute = KnowledgeBaseNewRouteImport.update({
+  id: '/knowledge-base/new',
+  path: '/knowledge-base/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsIndexRoute = ReportsIndexRouteImport.update({
+  id: '/reports/',
+  path: '/reports/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsAgentsRoute = ReportsAgentsRouteImport.update({
+  id: '/reports/agents',
+  path: '/reports/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsTicketsRoute = ReportsTicketsRouteImport.update({
+  id: '/reports/tickets',
+  path: '/reports/tickets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SlaBreachesRoute = SlaBreachesRouteImport.update({
+  id: '/sla/breaches',
+  path: '/sla/breaches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SlaPoliciesRoute = SlaPoliciesRouteImport.update({
+  id: '/sla/policies',
+  path: '/sla/policies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeamIndexRoute = TeamIndexRouteImport.update({
+  id: '/team/',
+  path: '/team/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeamIdRoute = TeamIdRouteImport.update({
+  id: '/team/$id',
+  path: '/team/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsIndexRoute = TicketsIndexRouteImport.update({
+  id: '/tickets/',
+  path: '/tickets/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsAssignedRoute = TicketsAssignedRouteImport.update({
+  id: '/tickets/assigned',
+  path: '/tickets/assigned',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsEscalationsRoute = TicketsEscalationsRouteImport.update({
+  id: '/tickets/escalations',
+  path: '/tickets/escalations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsNewRoute = TicketsNewRouteImport.update({
+  id: '/tickets/new',
+  path: '/tickets/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomersIdIndexRoute = CustomersIdIndexRouteImport.update({
+  id: '/customers/$id/',
+  path: '/customers/$id/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomersIdEditRoute = CustomersIdEditRouteImport.update({
+  id: '/customers/$id/edit',
+  path: '/customers/$id/edit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeBaseIdIndexRoute = KnowledgeBaseIdIndexRouteImport.update({
+  id: '/knowledge-base/$id/',
+  path: '/knowledge-base/$id/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeBaseIdEditRoute = KnowledgeBaseIdEditRouteImport.update({
+  id: '/knowledge-base/$id/edit',
+  path: '/knowledge-base/$id/edit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsIdIndexRoute = TicketsIdIndexRouteImport.update({
+  id: '/tickets/$id/',
+  path: '/tickets/$id/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsIdEditRoute = TicketsIdEditRouteImport.update({
+  id: '/tickets/$id/edit',
+  path: '/tickets/$id/edit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activity-log': typeof ActivityLogRoute
+  '/customers/new': typeof CustomersNewRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/knowledge-base/new': typeof KnowledgeBaseNewRoute
+  '/reports/agents': typeof ReportsAgentsRoute
+  '/reports/tickets': typeof ReportsTicketsRoute
+  '/sla/breaches': typeof SlaBreachesRoute
+  '/sla/policies': typeof SlaPoliciesRoute
+  '/team/$id': typeof TeamIdRoute
+  '/tickets/assigned': typeof TicketsAssignedRoute
+  '/tickets/escalations': typeof TicketsEscalationsRoute
+  '/tickets/new': typeof TicketsNewRoute
+  '/customers/': typeof CustomersIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/knowledge-base/': typeof KnowledgeBaseIndexRoute
+  '/reports/': typeof ReportsIndexRoute
+  '/team/': typeof TeamIndexRoute
+  '/tickets/': typeof TicketsIndexRoute
+  '/customers/$id/edit': typeof CustomersIdEditRoute
+  '/knowledge-base/$id/edit': typeof KnowledgeBaseIdEditRoute
+  '/tickets/$id/edit': typeof TicketsIdEditRoute
+  '/customers/$id/': typeof CustomersIdIndexRoute
+  '/knowledge-base/$id/': typeof KnowledgeBaseIdIndexRoute
+  '/tickets/$id/': typeof TicketsIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activity-log': typeof ActivityLogRoute
+  '/customers/new': typeof CustomersNewRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/knowledge-base/new': typeof KnowledgeBaseNewRoute
+  '/reports/agents': typeof ReportsAgentsRoute
+  '/reports/tickets': typeof ReportsTicketsRoute
+  '/sla/breaches': typeof SlaBreachesRoute
+  '/sla/policies': typeof SlaPoliciesRoute
+  '/team/$id': typeof TeamIdRoute
+  '/tickets/assigned': typeof TicketsAssignedRoute
+  '/tickets/escalations': typeof TicketsEscalationsRoute
+  '/tickets/new': typeof TicketsNewRoute
+  '/customers': typeof CustomersIndexRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/knowledge-base': typeof KnowledgeBaseIndexRoute
+  '/reports': typeof ReportsIndexRoute
+  '/team': typeof TeamIndexRoute
+  '/tickets': typeof TicketsIndexRoute
+  '/customers/$id/edit': typeof CustomersIdEditRoute
+  '/knowledge-base/$id/edit': typeof KnowledgeBaseIdEditRoute
+  '/tickets/$id/edit': typeof TicketsIdEditRoute
+  '/customers/$id': typeof CustomersIdIndexRoute
+  '/knowledge-base/$id': typeof KnowledgeBaseIdIndexRoute
+  '/tickets/$id': typeof TicketsIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activity-log': typeof ActivityLogRoute
+  '/customers/new': typeof CustomersNewRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/knowledge-base/new': typeof KnowledgeBaseNewRoute
+  '/reports/agents': typeof ReportsAgentsRoute
+  '/reports/tickets': typeof ReportsTicketsRoute
+  '/sla/breaches': typeof SlaBreachesRoute
+  '/sla/policies': typeof SlaPoliciesRoute
+  '/team/$id': typeof TeamIdRoute
+  '/tickets/assigned': typeof TicketsAssignedRoute
+  '/tickets/escalations': typeof TicketsEscalationsRoute
+  '/tickets/new': typeof TicketsNewRoute
+  '/customers/': typeof CustomersIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/knowledge-base/': typeof KnowledgeBaseIndexRoute
+  '/reports/': typeof ReportsIndexRoute
+  '/team/': typeof TeamIndexRoute
+  '/tickets/': typeof TicketsIndexRoute
+  '/customers/$id/edit': typeof CustomersIdEditRoute
+  '/knowledge-base/$id/edit': typeof KnowledgeBaseIdEditRoute
+  '/tickets/$id/edit': typeof TicketsIdEditRoute
+  '/customers/$id/': typeof CustomersIdIndexRoute
+  '/knowledge-base/$id/': typeof KnowledgeBaseIdIndexRoute
+  '/tickets/$id/': typeof TicketsIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/activity-log'
+    | '/customers/new'
+    | '/dashboard/analytics'
+    | '/knowledge-base/new'
+    | '/reports/agents'
+    | '/reports/tickets'
+    | '/sla/breaches'
+    | '/sla/policies'
+    | '/team/$id'
+    | '/tickets/assigned'
+    | '/tickets/escalations'
+    | '/tickets/new'
+    | '/customers/'
+    | '/dashboard/'
+    | '/knowledge-base/'
+    | '/reports/'
+    | '/team/'
+    | '/tickets/'
+    | '/customers/$id/edit'
+    | '/knowledge-base/$id/edit'
+    | '/tickets/$id/edit'
+    | '/customers/$id/'
+    | '/knowledge-base/$id/'
+    | '/tickets/$id/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/activity-log'
+    | '/customers/new'
+    | '/dashboard/analytics'
+    | '/knowledge-base/new'
+    | '/reports/agents'
+    | '/reports/tickets'
+    | '/sla/breaches'
+    | '/sla/policies'
+    | '/team/$id'
+    | '/tickets/assigned'
+    | '/tickets/escalations'
+    | '/tickets/new'
+    | '/customers'
+    | '/dashboard'
+    | '/knowledge-base'
+    | '/reports'
+    | '/team'
+    | '/tickets'
+    | '/customers/$id/edit'
+    | '/knowledge-base/$id/edit'
+    | '/tickets/$id/edit'
+    | '/customers/$id'
+    | '/knowledge-base/$id'
+    | '/tickets/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/activity-log'
+    | '/customers/new'
+    | '/dashboard/analytics'
+    | '/knowledge-base/new'
+    | '/reports/agents'
+    | '/reports/tickets'
+    | '/sla/breaches'
+    | '/sla/policies'
+    | '/team/$id'
+    | '/tickets/assigned'
+    | '/tickets/escalations'
+    | '/tickets/new'
+    | '/customers/'
+    | '/dashboard/'
+    | '/knowledge-base/'
+    | '/reports/'
+    | '/team/'
+    | '/tickets/'
+    | '/customers/$id/edit'
+    | '/knowledge-base/$id/edit'
+    | '/tickets/$id/edit'
+    | '/customers/$id/'
+    | '/knowledge-base/$id/'
+    | '/tickets/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivityLogRoute: typeof ActivityLogRoute
+  CustomersNewRoute: typeof CustomersNewRoute
+  DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
+  KnowledgeBaseNewRoute: typeof KnowledgeBaseNewRoute
+  ReportsAgentsRoute: typeof ReportsAgentsRoute
+  ReportsTicketsRoute: typeof ReportsTicketsRoute
+  SlaBreachesRoute: typeof SlaBreachesRoute
+  SlaPoliciesRoute: typeof SlaPoliciesRoute
+  TeamIdRoute: typeof TeamIdRoute
+  TicketsAssignedRoute: typeof TicketsAssignedRoute
+  TicketsEscalationsRoute: typeof TicketsEscalationsRoute
+  TicketsNewRoute: typeof TicketsNewRoute
+  CustomersIndexRoute: typeof CustomersIndexRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+  KnowledgeBaseIndexRoute: typeof KnowledgeBaseIndexRoute
+  ReportsIndexRoute: typeof ReportsIndexRoute
+  TeamIndexRoute: typeof TeamIndexRoute
+  TicketsIndexRoute: typeof TicketsIndexRoute
+  CustomersIdEditRoute: typeof CustomersIdEditRoute
+  KnowledgeBaseIdEditRoute: typeof KnowledgeBaseIdEditRoute
+  TicketsIdEditRoute: typeof TicketsIdEditRoute
+  CustomersIdIndexRoute: typeof CustomersIdIndexRoute
+  KnowledgeBaseIdIndexRoute: typeof KnowledgeBaseIdIndexRoute
+  TicketsIdIndexRoute: typeof TicketsIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +364,203 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/activity-log': {
+      id: '/activity-log'
+      path: '/activity-log'
+      fullPath: '/activity-log'
+      preLoaderRoute: typeof ActivityLogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customers/': {
+      id: '/customers/'
+      path: '/customers'
+      fullPath: '/customers/'
+      preLoaderRoute: typeof CustomersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customers/new': {
+      id: '/customers/new'
+      path: '/customers/new'
+      fullPath: '/customers/new'
+      preLoaderRoute: typeof CustomersNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/analytics': {
+      id: '/dashboard/analytics'
+      path: '/dashboard/analytics'
+      fullPath: '/dashboard/analytics'
+      preLoaderRoute: typeof DashboardAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge-base/': {
+      id: '/knowledge-base/'
+      path: '/knowledge-base'
+      fullPath: '/knowledge-base/'
+      preLoaderRoute: typeof KnowledgeBaseIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge-base/new': {
+      id: '/knowledge-base/new'
+      path: '/knowledge-base/new'
+      fullPath: '/knowledge-base/new'
+      preLoaderRoute: typeof KnowledgeBaseNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports/': {
+      id: '/reports/'
+      path: '/reports'
+      fullPath: '/reports/'
+      preLoaderRoute: typeof ReportsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports/agents': {
+      id: '/reports/agents'
+      path: '/reports/agents'
+      fullPath: '/reports/agents'
+      preLoaderRoute: typeof ReportsAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports/tickets': {
+      id: '/reports/tickets'
+      path: '/reports/tickets'
+      fullPath: '/reports/tickets'
+      preLoaderRoute: typeof ReportsTicketsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sla/breaches': {
+      id: '/sla/breaches'
+      path: '/sla/breaches'
+      fullPath: '/sla/breaches'
+      preLoaderRoute: typeof SlaBreachesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sla/policies': {
+      id: '/sla/policies'
+      path: '/sla/policies'
+      fullPath: '/sla/policies'
+      preLoaderRoute: typeof SlaPoliciesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/team/': {
+      id: '/team/'
+      path: '/team'
+      fullPath: '/team/'
+      preLoaderRoute: typeof TeamIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/team/$id': {
+      id: '/team/$id'
+      path: '/team/$id'
+      fullPath: '/team/$id'
+      preLoaderRoute: typeof TeamIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets/': {
+      id: '/tickets/'
+      path: '/tickets'
+      fullPath: '/tickets/'
+      preLoaderRoute: typeof TicketsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets/assigned': {
+      id: '/tickets/assigned'
+      path: '/tickets/assigned'
+      fullPath: '/tickets/assigned'
+      preLoaderRoute: typeof TicketsAssignedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets/escalations': {
+      id: '/tickets/escalations'
+      path: '/tickets/escalations'
+      fullPath: '/tickets/escalations'
+      preLoaderRoute: typeof TicketsEscalationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets/new': {
+      id: '/tickets/new'
+      path: '/tickets/new'
+      fullPath: '/tickets/new'
+      preLoaderRoute: typeof TicketsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customers/$id/': {
+      id: '/customers/$id/'
+      path: '/customers/$id'
+      fullPath: '/customers/$id/'
+      preLoaderRoute: typeof CustomersIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customers/$id/edit': {
+      id: '/customers/$id/edit'
+      path: '/customers/$id/edit'
+      fullPath: '/customers/$id/edit'
+      preLoaderRoute: typeof CustomersIdEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge-base/$id/': {
+      id: '/knowledge-base/$id/'
+      path: '/knowledge-base/$id'
+      fullPath: '/knowledge-base/$id/'
+      preLoaderRoute: typeof KnowledgeBaseIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge-base/$id/edit': {
+      id: '/knowledge-base/$id/edit'
+      path: '/knowledge-base/$id/edit'
+      fullPath: '/knowledge-base/$id/edit'
+      preLoaderRoute: typeof KnowledgeBaseIdEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets/$id/': {
+      id: '/tickets/$id/'
+      path: '/tickets/$id'
+      fullPath: '/tickets/$id/'
+      preLoaderRoute: typeof TicketsIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets/$id/edit': {
+      id: '/tickets/$id/edit'
+      path: '/tickets/$id/edit'
+      fullPath: '/tickets/$id/edit'
+      preLoaderRoute: typeof TicketsIdEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivityLogRoute: ActivityLogRoute,
+  CustomersNewRoute: CustomersNewRoute,
+  DashboardAnalyticsRoute: DashboardAnalyticsRoute,
+  KnowledgeBaseNewRoute: KnowledgeBaseNewRoute,
+  ReportsAgentsRoute: ReportsAgentsRoute,
+  ReportsTicketsRoute: ReportsTicketsRoute,
+  SlaBreachesRoute: SlaBreachesRoute,
+  SlaPoliciesRoute: SlaPoliciesRoute,
+  TeamIdRoute: TeamIdRoute,
+  TicketsAssignedRoute: TicketsAssignedRoute,
+  TicketsEscalationsRoute: TicketsEscalationsRoute,
+  TicketsNewRoute: TicketsNewRoute,
+  CustomersIndexRoute: CustomersIndexRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+  KnowledgeBaseIndexRoute: KnowledgeBaseIndexRoute,
+  ReportsIndexRoute: ReportsIndexRoute,
+  TeamIndexRoute: TeamIndexRoute,
+  TicketsIndexRoute: TicketsIndexRoute,
+  CustomersIdEditRoute: CustomersIdEditRoute,
+  KnowledgeBaseIdEditRoute: KnowledgeBaseIdEditRoute,
+  TicketsIdEditRoute: TicketsIdEditRoute,
+  CustomersIdIndexRoute: CustomersIdIndexRoute,
+  KnowledgeBaseIdIndexRoute: KnowledgeBaseIdIndexRoute,
+  TicketsIdIndexRoute: TicketsIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
