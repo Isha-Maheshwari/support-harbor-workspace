@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivityLogRouteImport } from './routes/activity-log'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
+import { Route as TicketsIndexRouteImport } from './routes/tickets.index'
+import { Route as TicketsAssignedRouteImport } from './routes/tickets.assigned'
+import { Route as TicketsEscalationsRouteImport } from './routes/tickets.escalations'
+import { Route as TicketsNewRouteImport } from './routes/tickets.new'
+import { Route as TicketsIdIndexRouteImport } from './routes/tickets.$id.index'
+import { Route as TicketsIdEditRouteImport } from './routes/tickets.$id.edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActivityLogRoute = ActivityLogRouteImport.update({
+  id: '/activity-log',
+  path: '/activity-log',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
+  id: '/dashboard/analytics',
+  path: '/dashboard/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsIndexRoute = TicketsIndexRouteImport.update({
+  id: '/tickets/',
+  path: '/tickets/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsAssignedRoute = TicketsAssignedRouteImport.update({
+  id: '/tickets/assigned',
+  path: '/tickets/assigned',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsEscalationsRoute = TicketsEscalationsRouteImport.update({
+  id: '/tickets/escalations',
+  path: '/tickets/escalations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsNewRoute = TicketsNewRouteImport.update({
+  id: '/tickets/new',
+  path: '/tickets/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsIdIndexRoute = TicketsIdIndexRouteImport.update({
+  id: '/tickets/$id/',
+  path: '/tickets/$id/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsIdEditRoute = TicketsIdEditRouteImport.update({
+  id: '/tickets/$id/edit',
+  path: '/tickets/$id/edit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activity-log': typeof ActivityLogRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/tickets/assigned': typeof TicketsAssignedRoute
+  '/tickets/escalations': typeof TicketsEscalationsRoute
+  '/tickets/new': typeof TicketsNewRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/tickets/': typeof TicketsIndexRoute
+  '/tickets/$id/edit': typeof TicketsIdEditRoute
+  '/tickets/$id/': typeof TicketsIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activity-log': typeof ActivityLogRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/tickets/assigned': typeof TicketsAssignedRoute
+  '/tickets/escalations': typeof TicketsEscalationsRoute
+  '/tickets/new': typeof TicketsNewRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/tickets': typeof TicketsIndexRoute
+  '/tickets/$id/edit': typeof TicketsIdEditRoute
+  '/tickets/$id': typeof TicketsIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activity-log': typeof ActivityLogRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/tickets/assigned': typeof TicketsAssignedRoute
+  '/tickets/escalations': typeof TicketsEscalationsRoute
+  '/tickets/new': typeof TicketsNewRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/tickets/': typeof TicketsIndexRoute
+  '/tickets/$id/edit': typeof TicketsIdEditRoute
+  '/tickets/$id/': typeof TicketsIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/activity-log'
+    | '/dashboard/analytics'
+    | '/tickets/assigned'
+    | '/tickets/escalations'
+    | '/tickets/new'
+    | '/dashboard/'
+    | '/tickets/'
+    | '/tickets/$id/edit'
+    | '/tickets/$id/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/activity-log'
+    | '/dashboard/analytics'
+    | '/tickets/assigned'
+    | '/tickets/escalations'
+    | '/tickets/new'
+    | '/dashboard'
+    | '/tickets'
+    | '/tickets/$id/edit'
+    | '/tickets/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/activity-log'
+    | '/dashboard/analytics'
+    | '/tickets/assigned'
+    | '/tickets/escalations'
+    | '/tickets/new'
+    | '/dashboard/'
+    | '/tickets/'
+    | '/tickets/$id/edit'
+    | '/tickets/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivityLogRoute: typeof ActivityLogRoute
+  DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
+  TicketsAssignedRoute: typeof TicketsAssignedRoute
+  TicketsEscalationsRoute: typeof TicketsEscalationsRoute
+  TicketsNewRoute: typeof TicketsNewRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+  TicketsIndexRoute: typeof TicketsIndexRoute
+  TicketsIdEditRoute: typeof TicketsIdEditRoute
+  TicketsIdIndexRoute: typeof TicketsIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/activity-log': {
+      id: '/activity-log'
+      path: '/activity-log'
+      fullPath: '/activity-log'
+      preLoaderRoute: typeof ActivityLogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/analytics': {
+      id: '/dashboard/analytics'
+      path: '/dashboard/analytics'
+      fullPath: '/dashboard/analytics'
+      preLoaderRoute: typeof DashboardAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets/': {
+      id: '/tickets/'
+      path: '/tickets'
+      fullPath: '/tickets/'
+      preLoaderRoute: typeof TicketsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets/assigned': {
+      id: '/tickets/assigned'
+      path: '/tickets/assigned'
+      fullPath: '/tickets/assigned'
+      preLoaderRoute: typeof TicketsAssignedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets/escalations': {
+      id: '/tickets/escalations'
+      path: '/tickets/escalations'
+      fullPath: '/tickets/escalations'
+      preLoaderRoute: typeof TicketsEscalationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets/new': {
+      id: '/tickets/new'
+      path: '/tickets/new'
+      fullPath: '/tickets/new'
+      preLoaderRoute: typeof TicketsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets/$id/': {
+      id: '/tickets/$id/'
+      path: '/tickets/$id'
+      fullPath: '/tickets/$id/'
+      preLoaderRoute: typeof TicketsIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets/$id/edit': {
+      id: '/tickets/$id/edit'
+      path: '/tickets/$id/edit'
+      fullPath: '/tickets/$id/edit'
+      preLoaderRoute: typeof TicketsIdEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivityLogRoute: ActivityLogRoute,
+  DashboardAnalyticsRoute: DashboardAnalyticsRoute,
+  TicketsAssignedRoute: TicketsAssignedRoute,
+  TicketsEscalationsRoute: TicketsEscalationsRoute,
+  TicketsNewRoute: TicketsNewRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+  TicketsIndexRoute: TicketsIndexRoute,
+  TicketsIdEditRoute: TicketsIdEditRoute,
+  TicketsIdIndexRoute: TicketsIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
