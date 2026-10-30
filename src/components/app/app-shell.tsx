@@ -39,11 +39,11 @@ function ServiceControls() {
       <div className="font-semibold uppercase tracking-wider text-sidebar-foreground/60">Mock service</div>
       <div>
         <div className="mb-1.5 flex justify-between"><span>Latency</span><span className="font-mono">{s.latency}ms</span></div>
-        <Slider value={[s.latency]} min={0} max={3000} step={50} onValueChange={([v]) => setServiceSettings({ latency: v })} />
+        <Slider value={[s.latency]} min={0} max={3000} step={50} onValueChange={(v) => setServiceSettings({ latency: v[0] ?? 0 })} />
       </div>
       <div>
         <div className="mb-1.5 flex justify-between"><span>Random failures</span><span className="font-mono">{Math.round(s.failureRate * 100)}%</span></div>
-        <Slider value={[s.failureRate * 100]} min={0} max={100} step={5} onValueChange={([v]) => setServiceSettings({ failureRate: v / 100 })} />
+        <Slider value={[s.failureRate * 100]} min={0} max={100} step={5} onValueChange={(v) => setServiceSettings({ failureRate: (v[0] ?? 0) / 100 })} />
       </div>
       <label className="flex items-center justify-between"><span>Force outage</span><Switch checked={s.forceError} onCheckedChange={(v) => setServiceSettings({ forceError: v })} /></label>
     </div>

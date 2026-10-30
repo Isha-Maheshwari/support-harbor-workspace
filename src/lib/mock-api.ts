@@ -18,7 +18,7 @@ export interface Comment { id: string; authorType: "agent" | "customer"; authorI
 export interface Ticket {
   id: string; subject: string; description: string; status: TicketStatus; priority: Priority;
   channel: Channel; customerId: string; assigneeId: string | null; tags: string[];
-  createdAt: string; updatedAt: string; dueAt: string; escalated: boolean; escalationReason?: string;
+  createdAt: string; updatedAt: string; dueAt: string; escalated: boolean; escalationReason?: string | undefined;
   comments: Comment[];
 }
 export interface Article {
@@ -51,7 +51,7 @@ async function call<T>(fn: () => T): Promise<T> {
 export const NOW = Date.parse("2026-10-29T09:00:00Z");
 function rng(seed: number) { return () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const r = rng(42);
-const pick = <T,>(a: readonly T[]) => a[Math.floor(r() * a.length)];
+const pick = <T,>(a: readonly T[]): T => a[Math.floor(r() * a.length)] as T;
 const iso = (ms: number) => new Date(ms).toISOString();
 const H = 3600_000;
 
@@ -59,7 +59,7 @@ const agentNames = ["Priya Raman", "Marcus Chen", "Sofia Alvarez", "Daniel Okafo
 const teams = ["Tier 1", "Tier 2", "Billing", "Technical"];
 const agents: Agent[] = agentNames.map((name, i) => ({
   id: `a${i + 1}`, name, email: name.toLowerCase().replace(" ", ".") + "@supportdesk.io",
-  role: i === 0 ? "Manager" : i < 3 ? "Lead" : "Agent", team: teams[i % 4],
+  role: i === 0 ? "Manager" : i < 3 ? "Lead" : "Agent", team: teams[i % 4] as string,
   status: pick(["online", "online", "away", "offline"] as const), capacity: 15 + Math.floor(r() * 15),
   joinedAt: iso(NOW - (200 + i * 90) * 24 * H),
 }));
@@ -70,7 +70,7 @@ const companies = ["Northwind Labs", "Acme Logistics", "Helios Energy", "Bluefin
 const customers: Customer[] = Array.from({ length: 36 }, (_, i) => {
   const name = `${pick(firsts)} ${pick(lasts)}`; const company = pick(companies);
   return {
-    id: `c${i + 1}`, name, company, email: `${name.split(" ")[0].toLowerCase()}@${company.split(" ")[0].toLowerCase()}.com`,
+    id: `c${i + 1}`, name, company, email: `${name.split(" ")[0]!.toLowerCase()}@${company.split(" ")[0]!.toLowerCase()}.com`,
     phone: `+1 (${200 + Math.floor(r() * 700)}) 555-${String(1000 + Math.floor(r() * 9000))}`,
     tier: pick(["free", "pro", "pro", "enterprise"] as const), status: pick(["active", "active", "active", "trial", "churned"] as const),
     createdAt: iso(NOW - Math.floor(r() * 700) * 24 * H), notes: "",
@@ -101,7 +101,7 @@ const tickets: Ticket[] = Array.from({ length: 84 }, (_, i) => {
 const categories = ["Getting Started", "Billing", "Integrations", "Troubleshooting", "Security", "API"];
 const articleTitles = ["How to reset your password", "Understanding your invoice", "Connecting Slack to SupportDesk", "Fixing webhook delivery delays", "Setting up SSO with Okta", "API rate limits explained", "Exporting data to CSV", "Enabling two-factor authentication", "Inviting teammates", "Bulk importing customers", "Troubleshooting mobile app crashes", "Refund and cancellation policy", "Configuring email forwarding", "Best practices for API keys"];
 const articles: Article[] = articleTitles.map((title, i) => ({
-  id: `kb${i + 1}`, title, category: categories[i % categories.length],
+  id: `kb${i + 1}`, title, category: categories[i % categories.length] as string,
   body: `## Overview\nThis guide explains ${title.toLowerCase()}.\n\n## Steps\n1. Open **Settings** from the left sidebar.\n2. Choose the relevant section.\n3. Follow the on-screen instructions and save.\n\n## Still stuck?\nContact support and reference this article.`,
   status: i % 7 === 6 ? "draft" : "published", authorId: pick(agents).id, views: Math.floor(r() * 5000),
   helpful: Math.floor(r() * 300), notHelpful: Math.floor(r() * 40), tags: [pick(tagPool)], updatedAt: iso(NOW - Math.floor(r() * 90) * 24 * H),
@@ -130,7 +130,7 @@ const isOpen = (t: Ticket) => t.status !== "solved" && t.status !== "closed";
 export const isBreached = (t: Ticket, at = Date.now()) => isOpen(t) && Date.parse(t.dueAt) < Math.max(at, NOW);
 
 // ---------- API ----------
-export interface TicketFilters { q?: string; status?: string; priority?: string; assigneeId?: string; escalated?: boolean; customerId?: string; }
+export interface TicketFilters { q?: string | undefined; status?: string | undefined; priority?: string | undefined; assigneeId?: string | undefined; escalated?: boolean | undefined; customerId?: string | undefined; }
 export type TicketInput = Pick<Ticket, "subject" | "description" | "status" | "priority" | "channel" | "customerId" | "assigneeId" | "tags">;
 export type CustomerInput = Omit<Customer, "id" | "createdAt">;
 export type ArticleInput = Pick<Article, "title" | "category" | "body" | "status" | "tags">;
