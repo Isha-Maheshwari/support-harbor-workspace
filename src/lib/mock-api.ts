@@ -18,7 +18,7 @@ export interface Comment { id: string; authorType: "agent" | "customer"; authorI
 export interface Ticket {
   id: string; subject: string; description: string; status: TicketStatus; priority: Priority;
   channel: Channel; customerId: string; assigneeId: string | null; tags: string[];
-  createdAt: string; updatedAt: string; dueAt: string; escalated: boolean; escalationReason?: string;
+  createdAt: string; updatedAt: string; dueAt: string; escalated: boolean; escalationReason?: string | undefined;
   comments: Comment[];
 }
 export interface Article {
@@ -130,7 +130,7 @@ const isOpen = (t: Ticket) => t.status !== "solved" && t.status !== "closed";
 export const isBreached = (t: Ticket, at = Date.now()) => isOpen(t) && Date.parse(t.dueAt) < Math.max(at, NOW);
 
 // ---------- API ----------
-export interface TicketFilters { q?: string; status?: string; priority?: string; assigneeId?: string; escalated?: boolean; customerId?: string; }
+export interface TicketFilters { q?: string | undefined; status?: string | undefined; priority?: string | undefined; assigneeId?: string | undefined; escalated?: boolean | undefined; customerId?: string | undefined; }
 export type TicketInput = Pick<Ticket, "subject" | "description" | "status" | "priority" | "channel" | "customerId" | "assigneeId" | "tags">;
 export type CustomerInput = Omit<Customer, "id" | "createdAt">;
 export type ArticleInput = Pick<Article, "title" | "category" | "body" | "status" | "tags">;

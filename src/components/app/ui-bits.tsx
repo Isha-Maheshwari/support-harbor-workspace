@@ -56,7 +56,7 @@ export const PriorityBadge = ({ p }: { p: Priority }) => (
   </span>
 );
 
-export function StatCard({ label, value, hint, tone }: { label: string; value: ReactNode; hint?: string; tone?: "warn" | "bad" | "good" }) {
+export function StatCard({ label, value, hint, tone }: { label: string; value: ReactNode; hint?: string | undefined; tone?: "warn" | "bad" | "good" | undefined }) {
   return (
     <div className="rounded-lg border bg-card p-4 shadow-card">
       <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</div>
