@@ -7,7 +7,9 @@ import type { ArticleInput, CustomerInput, TicketInput } from "@/lib/mock-api";
 import { useAgents, useCustomers } from "@/lib/queries";
 import { selectCls } from "./ui-bits";
 
-function Field({ label, error, children, htmlFor }: { label: string; error?: string; children: ReactNode; htmlFor: string }) {
+type Errs = Partial<Record<"subject" | "customerId" | "description" | "name" | "email" | "company" | "title" | "body", string>>;
+
+function Field({ label, error, children, htmlFor }: { label: string; error?: string | undefined; children: ReactNode; htmlFor: string }) {
   return (
     <div className="space-y-1.5">
       <Label htmlFor={htmlFor}>{label}</Label>
@@ -31,11 +33,11 @@ export function TicketForm({ initial, onSubmit, pending, submitLabel, onCancel }
   const customers = useCustomers().data ?? [];
   const [d, setD] = useState<TicketInput>({ subject: "", description: "", status: "open", priority: "medium", channel: "email", customerId: "", assigneeId: null, tags: [], ...initial });
   const [tags, setTags] = useState((initial?.tags ?? []).join(", "));
-  const [err, setErr] = useState<Record<string, string>>({});
+  const [err, setErr] = useState<Errs>({});
   const set = <K extends keyof TicketInput>(k: K, v: TicketInput[K]) => setD((p) => ({ ...p, [k]: v }));
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    const er: Record<string, string> = {};
+    const er: Errs = {};
     if (d.subject.trim().length < 5) er.subject = "Subject must be at least 5 characters";
     if (!d.customerId) er.customerId = "Select a customer";
     if (d.description.trim().length < 10) er.description = "Describe the issue (10+ characters)";
@@ -81,11 +83,11 @@ export function TicketForm({ initial, onSubmit, pending, submitLabel, onCancel }
 
 export function CustomerForm({ initial, onSubmit, pending, submitLabel, onCancel }: { initial?: Partial<CustomerInput>; onSubmit: (d: CustomerInput) => void; pending: boolean; submitLabel: string; onCancel: () => void }) {
   const [d, setD] = useState<CustomerInput>({ name: "", company: "", email: "", phone: "", tier: "pro", status: "active", notes: "", ...initial });
-  const [err, setErr] = useState<Record<string, string>>({});
+  const [err, setErr] = useState<Errs>({});
   const set = <K extends keyof CustomerInput>(k: K, v: CustomerInput[K]) => setD((p) => ({ ...p, [k]: v }));
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    const er: Record<string, string> = {};
+    const er: Errs = {};
     if (!d.name.trim()) er.name = "Name is required";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) er.email = "Enter a valid email";
     if (!d.company.trim()) er.company = "Company is required";
@@ -111,11 +113,11 @@ export function CustomerForm({ initial, onSubmit, pending, submitLabel, onCancel
 export function ArticleForm({ initial, onSubmit, pending, submitLabel, onCancel }: { initial?: Partial<ArticleInput>; onSubmit: (d: ArticleInput) => void; pending: boolean; submitLabel: string; onCancel: () => void }) {
   const [d, setD] = useState<ArticleInput>({ title: "", category: "Getting Started", body: "", status: "draft", tags: [], ...initial });
   const [tags, setTags] = useState((initial?.tags ?? []).join(", "));
-  const [err, setErr] = useState<Record<string, string>>({});
+  const [err, setErr] = useState<Errs>({});
   const set = <K extends keyof ArticleInput>(k: K, v: ArticleInput[K]) => setD((p) => ({ ...p, [k]: v }));
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    const er: Record<string, string> = {};
+    const er: Errs = {};
     if (d.title.trim().length < 5) er.title = "Title must be at least 5 characters";
     if (d.body.trim().length < 20) er.body = "Body must be at least 20 characters";
     setErr(er);
