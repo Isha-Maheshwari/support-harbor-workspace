@@ -9,8 +9,6 @@ import { selectCls } from "./ui-bits";
 
 type Errs = Partial<Record<"subject" | "customerId" | "description" | "name" | "email" | "company" | "title" | "body", string>>;
 
-const formClassName = "grid max-w-3xl gap-4 rounded-lg border bg-card p-6 shadow-card";
-
 function Field({ label, error, children, htmlFor }: { label: string; error?: string | undefined; children: ReactNode; htmlFor: string }) {
   return (
     <div className="space-y-1.5">
@@ -47,7 +45,7 @@ export function TicketForm({ initial, onSubmit, pending, submitLabel, onCancel }
     if (!Object.keys(er).length) onSubmit({ ...d, tags: tags.split(",").map((t) => t.trim()).filter(Boolean) });
   };
   return (
-    <form onSubmit={submit} className={formClassName}>
+    <form onSubmit={submit} className="grid max-w-3xl gap-4 rounded-lg border bg-card p-6 shadow-card">
       <Field label="Subject" htmlFor="subject" error={err.subject}><Input id="subject" maxLength={150} value={d.subject} onChange={(e) => set("subject", e.target.value)} /></Field>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Customer" htmlFor="customer" error={err.customerId}>
@@ -97,7 +95,7 @@ export function CustomerForm({ initial, onSubmit, pending, submitLabel, onCancel
     if (!Object.keys(er).length) onSubmit(d);
   };
   return (
-    <form onSubmit={submit} className={formClassName}>
+    <form onSubmit={submit} className="grid max-w-3xl gap-4 rounded-lg border bg-card p-6 shadow-card">
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Full name" htmlFor="name" error={err.name}><Input id="name" maxLength={100} value={d.name} onChange={(e) => set("name", e.target.value)} /></Field>
         <Field label="Company" htmlFor="company" error={err.company}><Input id="company" maxLength={100} value={d.company} onChange={(e) => set("company", e.target.value)} /></Field>
@@ -126,7 +124,7 @@ export function ArticleForm({ initial, onSubmit, pending, submitLabel, onCancel 
     if (!Object.keys(er).length) onSubmit({ ...d, tags: tags.split(",").map((t) => t.trim()).filter(Boolean) });
   };
   return (
-    <form onSubmit={submit} className={formClassName}>
+    <form onSubmit={submit} className="grid max-w-3xl gap-4 rounded-lg border bg-card p-6 shadow-card">
       <Field label="Title" htmlFor="title" error={err.title}><Input id="title" maxLength={150} value={d.title} onChange={(e) => set("title", e.target.value)} /></Field>
       <div className="grid gap-4 sm:grid-cols-3">
         <Field label="Category" htmlFor="cat"><select id="cat" className={selectCls} value={d.category} onChange={(e) => set("category", e.target.value)}>{["Getting Started", "Billing", "Integrations", "Troubleshooting", "Security", "API"].map((v) => <option key={v}>{v}</option>)}</select></Field>
