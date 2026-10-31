@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Bars } from "@/components/app/charts";
-import { PageHeader, Panel, QueryBoundary, TableFrame } from "@/components/app/ui-bits";
+import { PageHeader, Panel, QueryBoundary } from "@/components/app/ui-bits";
 import { downloadCsv } from "@/lib/csv";
 import { pageHead } from "@/lib/head";
 import { useStats } from "@/lib/queries";
@@ -24,7 +24,7 @@ function AgentReport() {
           <>
             <PageHeader title="Agent report" actions={<Button variant="outline" onClick={() => downloadCsv("agents.csv", rows)}><Download className="h-4 w-4" /> Export CSV</Button>} />
             <Panel title="Solved vs breached" className="mb-6"><Bars data={rows.map((r) => ({ name: r.name.split(" ")[0], solved: r.solved, breached: r.breached }))} keys={["solved", "breached"]} /></Panel>
-            <TableFrame><Table>
+            <div className="overflow-x-auto rounded-lg border bg-card shadow-card"><Table>
               <TableHeader><TableRow><TableHead>Agent</TableHead><TableHead>Team</TableHead>
                 {cols.map(([k, l]) => <TableHead key={k}><button onClick={() => setSort(k)} className={sort === k ? "font-semibold text-primary" : ""}>{l}{sort === k ? " ↓" : ""}</button></TableHead>)}
               </TableRow></TableHeader>
@@ -35,7 +35,7 @@ function AgentReport() {
                   {cols.map(([k]) => <TableCell key={k} className={k === "breached" && r[k] ? "text-destructive" : ""}>{r[k]}</TableCell>)}
                 </TableRow>
               ))}</TableBody>
-            </Table></TableFrame>
+            </Table></div>
           </>
         );
       }}

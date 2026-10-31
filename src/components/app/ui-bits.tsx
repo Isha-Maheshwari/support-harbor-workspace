@@ -75,10 +75,6 @@ export function Panel({ title, children, action, className }: { title?: string; 
   );
 }
 
-export function TableFrame({ children }: { children: ReactNode }) {
-  return <div className="overflow-x-auto rounded-lg border bg-card shadow-card">{children}</div>;
-}
-
 export function NotFoundBlock({ what, back }: { what: string; back: "/tickets" | "/customers" | "/knowledge-base" | "/team" }) {
   return (
     <div className="rounded-lg border bg-card p-10 text-center">
