@@ -11,6 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ActivityLogRouteImport } from './routes/activity-log'
+import { Route as ApiActivityRouteImport } from './routes/api.activity'
+import { Route as ApiAgentsRouteImport } from './routes/api.agents'
+import { Route as ApiArticlesRouteImport } from './routes/api.articles'
+import { Route as ApiCustomersRouteImport } from './routes/api.customers'
+import { Route as ApiStatsRouteImport } from './routes/api.stats'
+import { Route as ApiTicketsRouteImport } from './routes/api.tickets'
 import { Route as CustomersIndexRouteImport } from './routes/customers.index'
 import { Route as CustomersNewRouteImport } from './routes/customers.new'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
@@ -28,12 +34,21 @@ import { Route as TicketsIndexRouteImport } from './routes/tickets.index'
 import { Route as TicketsAssignedRouteImport } from './routes/tickets.assigned'
 import { Route as TicketsEscalationsRouteImport } from './routes/tickets.escalations'
 import { Route as TicketsNewRouteImport } from './routes/tickets.new'
+import { Route as ApiAgentsIdRouteImport } from './routes/api.agents.$id'
+import { Route as ApiArticlesIdRouteImport } from './routes/api.articles.$id'
+import { Route as ApiCustomersIdRouteImport } from './routes/api.customers.$id'
+import { Route as ApiSlaBreachesRouteImport } from './routes/api.sla.breaches'
+import { Route as ApiSlaPoliciesRouteImport } from './routes/api.sla.policies'
+import { Route as ApiTicketsIdRouteImport } from './routes/api.tickets.$id'
 import { Route as CustomersIdIndexRouteImport } from './routes/customers.$id.index'
 import { Route as CustomersIdEditRouteImport } from './routes/customers.$id.edit'
 import { Route as KnowledgeBaseIdIndexRouteImport } from './routes/knowledge-base.$id.index'
 import { Route as KnowledgeBaseIdEditRouteImport } from './routes/knowledge-base.$id.edit'
 import { Route as TicketsIdIndexRouteImport } from './routes/tickets.$id.index'
 import { Route as TicketsIdEditRouteImport } from './routes/tickets.$id.edit'
+import { Route as ApiArticlesIdVoteRouteImport } from './routes/api.articles.$id.vote'
+import { Route as ApiSlaPoliciesIdRouteImport } from './routes/api.sla.policies.$id'
+import { Route as ApiTicketsIdCommentsRouteImport } from './routes/api.tickets.$id.comments'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -43,6 +58,36 @@ const IndexRoute = IndexRouteImport.update({
 const ActivityLogRoute = ActivityLogRouteImport.update({
   id: '/activity-log',
   path: '/activity-log',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiActivityRoute = ApiActivityRouteImport.update({
+  id: '/api/activity',
+  path: '/api/activity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAgentsRoute = ApiAgentsRouteImport.update({
+  id: '/api/agents',
+  path: '/api/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiArticlesRoute = ApiArticlesRouteImport.update({
+  id: '/api/articles',
+  path: '/api/articles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiCustomersRoute = ApiCustomersRouteImport.update({
+  id: '/api/customers',
+  path: '/api/customers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStatsRoute = ApiStatsRouteImport.update({
+  id: '/api/stats',
+  path: '/api/stats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiTicketsRoute = ApiTicketsRouteImport.update({
+  id: '/api/tickets',
+  path: '/api/tickets',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CustomersIndexRoute = CustomersIndexRouteImport.update({
@@ -130,6 +175,36 @@ const TicketsNewRoute = TicketsNewRouteImport.update({
   path: '/tickets/new',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAgentsIdRoute = ApiAgentsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiAgentsRoute,
+} as any)
+const ApiArticlesIdRoute = ApiArticlesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiArticlesRoute,
+} as any)
+const ApiCustomersIdRoute = ApiCustomersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiCustomersRoute,
+} as any)
+const ApiSlaBreachesRoute = ApiSlaBreachesRouteImport.update({
+  id: '/api/sla/breaches',
+  path: '/api/sla/breaches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSlaPoliciesRoute = ApiSlaPoliciesRouteImport.update({
+  id: '/api/sla/policies',
+  path: '/api/sla/policies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiTicketsIdRoute = ApiTicketsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiTicketsRoute,
+} as any)
 const CustomersIdIndexRoute = CustomersIdIndexRouteImport.update({
   id: '/customers/$id/',
   path: '/customers/$id/',
@@ -160,10 +235,31 @@ const TicketsIdEditRoute = TicketsIdEditRouteImport.update({
   path: '/tickets/$id/edit',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiArticlesIdVoteRoute = ApiArticlesIdVoteRouteImport.update({
+  id: '/vote',
+  path: '/vote',
+  getParentRoute: () => ApiArticlesIdRoute,
+} as any)
+const ApiSlaPoliciesIdRoute = ApiSlaPoliciesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiSlaPoliciesRoute,
+} as any)
+const ApiTicketsIdCommentsRoute = ApiTicketsIdCommentsRouteImport.update({
+  id: '/comments',
+  path: '/comments',
+  getParentRoute: () => ApiTicketsIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/activity-log': typeof ActivityLogRoute
+  '/api/activity': typeof ApiActivityRoute
+  '/api/agents': typeof ApiAgentsRouteWithChildren
+  '/api/articles': typeof ApiArticlesRouteWithChildren
+  '/api/customers': typeof ApiCustomersRouteWithChildren
+  '/api/stats': typeof ApiStatsRoute
+  '/api/tickets': typeof ApiTicketsRouteWithChildren
   '/customers/new': typeof CustomersNewRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/knowledge-base/new': typeof KnowledgeBaseNewRoute
@@ -181,16 +277,31 @@ export interface FileRoutesByFullPath {
   '/reports/': typeof ReportsIndexRoute
   '/team/': typeof TeamIndexRoute
   '/tickets/': typeof TicketsIndexRoute
+  '/api/agents/$id': typeof ApiAgentsIdRoute
+  '/api/articles/$id': typeof ApiArticlesIdRouteWithChildren
+  '/api/customers/$id': typeof ApiCustomersIdRoute
+  '/api/sla/breaches': typeof ApiSlaBreachesRoute
+  '/api/sla/policies': typeof ApiSlaPoliciesRouteWithChildren
+  '/api/tickets/$id': typeof ApiTicketsIdRouteWithChildren
   '/customers/$id/edit': typeof CustomersIdEditRoute
   '/knowledge-base/$id/edit': typeof KnowledgeBaseIdEditRoute
   '/tickets/$id/edit': typeof TicketsIdEditRoute
   '/customers/$id/': typeof CustomersIdIndexRoute
   '/knowledge-base/$id/': typeof KnowledgeBaseIdIndexRoute
   '/tickets/$id/': typeof TicketsIdIndexRoute
+  '/api/articles/$id/vote': typeof ApiArticlesIdVoteRoute
+  '/api/sla/policies/$id': typeof ApiSlaPoliciesIdRoute
+  '/api/tickets/$id/comments': typeof ApiTicketsIdCommentsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/activity-log': typeof ActivityLogRoute
+  '/api/activity': typeof ApiActivityRoute
+  '/api/agents': typeof ApiAgentsRouteWithChildren
+  '/api/articles': typeof ApiArticlesRouteWithChildren
+  '/api/customers': typeof ApiCustomersRouteWithChildren
+  '/api/stats': typeof ApiStatsRoute
+  '/api/tickets': typeof ApiTicketsRouteWithChildren
   '/customers/new': typeof CustomersNewRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/knowledge-base/new': typeof KnowledgeBaseNewRoute
@@ -208,17 +319,32 @@ export interface FileRoutesByTo {
   '/reports': typeof ReportsIndexRoute
   '/team': typeof TeamIndexRoute
   '/tickets': typeof TicketsIndexRoute
+  '/api/agents/$id': typeof ApiAgentsIdRoute
+  '/api/articles/$id': typeof ApiArticlesIdRouteWithChildren
+  '/api/customers/$id': typeof ApiCustomersIdRoute
+  '/api/sla/breaches': typeof ApiSlaBreachesRoute
+  '/api/sla/policies': typeof ApiSlaPoliciesRouteWithChildren
+  '/api/tickets/$id': typeof ApiTicketsIdRouteWithChildren
   '/customers/$id/edit': typeof CustomersIdEditRoute
   '/knowledge-base/$id/edit': typeof KnowledgeBaseIdEditRoute
   '/tickets/$id/edit': typeof TicketsIdEditRoute
   '/customers/$id': typeof CustomersIdIndexRoute
   '/knowledge-base/$id': typeof KnowledgeBaseIdIndexRoute
   '/tickets/$id': typeof TicketsIdIndexRoute
+  '/api/articles/$id/vote': typeof ApiArticlesIdVoteRoute
+  '/api/sla/policies/$id': typeof ApiSlaPoliciesIdRoute
+  '/api/tickets/$id/comments': typeof ApiTicketsIdCommentsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/activity-log': typeof ActivityLogRoute
+  '/api/activity': typeof ApiActivityRoute
+  '/api/agents': typeof ApiAgentsRouteWithChildren
+  '/api/articles': typeof ApiArticlesRouteWithChildren
+  '/api/customers': typeof ApiCustomersRouteWithChildren
+  '/api/stats': typeof ApiStatsRoute
+  '/api/tickets': typeof ApiTicketsRouteWithChildren
   '/customers/new': typeof CustomersNewRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/knowledge-base/new': typeof KnowledgeBaseNewRoute
@@ -236,18 +362,33 @@ export interface FileRoutesById {
   '/reports/': typeof ReportsIndexRoute
   '/team/': typeof TeamIndexRoute
   '/tickets/': typeof TicketsIndexRoute
+  '/api/agents/$id': typeof ApiAgentsIdRoute
+  '/api/articles/$id': typeof ApiArticlesIdRouteWithChildren
+  '/api/customers/$id': typeof ApiCustomersIdRoute
+  '/api/sla/breaches': typeof ApiSlaBreachesRoute
+  '/api/sla/policies': typeof ApiSlaPoliciesRouteWithChildren
+  '/api/tickets/$id': typeof ApiTicketsIdRouteWithChildren
   '/customers/$id/edit': typeof CustomersIdEditRoute
   '/knowledge-base/$id/edit': typeof KnowledgeBaseIdEditRoute
   '/tickets/$id/edit': typeof TicketsIdEditRoute
   '/customers/$id/': typeof CustomersIdIndexRoute
   '/knowledge-base/$id/': typeof KnowledgeBaseIdIndexRoute
   '/tickets/$id/': typeof TicketsIdIndexRoute
+  '/api/articles/$id/vote': typeof ApiArticlesIdVoteRoute
+  '/api/sla/policies/$id': typeof ApiSlaPoliciesIdRoute
+  '/api/tickets/$id/comments': typeof ApiTicketsIdCommentsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/activity-log'
+    | '/api/activity'
+    | '/api/agents'
+    | '/api/articles'
+    | '/api/customers'
+    | '/api/stats'
+    | '/api/tickets'
     | '/customers/new'
     | '/dashboard/analytics'
     | '/knowledge-base/new'
@@ -265,16 +406,31 @@ export interface FileRouteTypes {
     | '/reports/'
     | '/team/'
     | '/tickets/'
+    | '/api/agents/$id'
+    | '/api/articles/$id'
+    | '/api/customers/$id'
+    | '/api/sla/breaches'
+    | '/api/sla/policies'
+    | '/api/tickets/$id'
     | '/customers/$id/edit'
     | '/knowledge-base/$id/edit'
     | '/tickets/$id/edit'
     | '/customers/$id/'
     | '/knowledge-base/$id/'
     | '/tickets/$id/'
+    | '/api/articles/$id/vote'
+    | '/api/sla/policies/$id'
+    | '/api/tickets/$id/comments'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/activity-log'
+    | '/api/activity'
+    | '/api/agents'
+    | '/api/articles'
+    | '/api/customers'
+    | '/api/stats'
+    | '/api/tickets'
     | '/customers/new'
     | '/dashboard/analytics'
     | '/knowledge-base/new'
@@ -292,16 +448,31 @@ export interface FileRouteTypes {
     | '/reports'
     | '/team'
     | '/tickets'
+    | '/api/agents/$id'
+    | '/api/articles/$id'
+    | '/api/customers/$id'
+    | '/api/sla/breaches'
+    | '/api/sla/policies'
+    | '/api/tickets/$id'
     | '/customers/$id/edit'
     | '/knowledge-base/$id/edit'
     | '/tickets/$id/edit'
     | '/customers/$id'
     | '/knowledge-base/$id'
     | '/tickets/$id'
+    | '/api/articles/$id/vote'
+    | '/api/sla/policies/$id'
+    | '/api/tickets/$id/comments'
   id:
     | '__root__'
     | '/'
     | '/activity-log'
+    | '/api/activity'
+    | '/api/agents'
+    | '/api/articles'
+    | '/api/customers'
+    | '/api/stats'
+    | '/api/tickets'
     | '/customers/new'
     | '/dashboard/analytics'
     | '/knowledge-base/new'
@@ -319,17 +490,32 @@ export interface FileRouteTypes {
     | '/reports/'
     | '/team/'
     | '/tickets/'
+    | '/api/agents/$id'
+    | '/api/articles/$id'
+    | '/api/customers/$id'
+    | '/api/sla/breaches'
+    | '/api/sla/policies'
+    | '/api/tickets/$id'
     | '/customers/$id/edit'
     | '/knowledge-base/$id/edit'
     | '/tickets/$id/edit'
     | '/customers/$id/'
     | '/knowledge-base/$id/'
     | '/tickets/$id/'
+    | '/api/articles/$id/vote'
+    | '/api/sla/policies/$id'
+    | '/api/tickets/$id/comments'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ActivityLogRoute: typeof ActivityLogRoute
+  ApiActivityRoute: typeof ApiActivityRoute
+  ApiAgentsRoute: typeof ApiAgentsRouteWithChildren
+  ApiArticlesRoute: typeof ApiArticlesRouteWithChildren
+  ApiCustomersRoute: typeof ApiCustomersRouteWithChildren
+  ApiStatsRoute: typeof ApiStatsRoute
+  ApiTicketsRoute: typeof ApiTicketsRouteWithChildren
   CustomersNewRoute: typeof CustomersNewRoute
   DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
   KnowledgeBaseNewRoute: typeof KnowledgeBaseNewRoute
@@ -347,6 +533,8 @@ export interface RootRouteChildren {
   ReportsIndexRoute: typeof ReportsIndexRoute
   TeamIndexRoute: typeof TeamIndexRoute
   TicketsIndexRoute: typeof TicketsIndexRoute
+  ApiSlaBreachesRoute: typeof ApiSlaBreachesRoute
+  ApiSlaPoliciesRoute: typeof ApiSlaPoliciesRouteWithChildren
   CustomersIdEditRoute: typeof CustomersIdEditRoute
   KnowledgeBaseIdEditRoute: typeof KnowledgeBaseIdEditRoute
   TicketsIdEditRoute: typeof TicketsIdEditRoute
@@ -369,6 +557,48 @@ declare module '@tanstack/react-router' {
       path: '/activity-log'
       fullPath: '/activity-log'
       preLoaderRoute: typeof ActivityLogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/activity': {
+      id: '/api/activity'
+      path: '/api/activity'
+      fullPath: '/api/activity'
+      preLoaderRoute: typeof ApiActivityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/agents': {
+      id: '/api/agents'
+      path: '/api/agents'
+      fullPath: '/api/agents'
+      preLoaderRoute: typeof ApiAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/articles': {
+      id: '/api/articles'
+      path: '/api/articles'
+      fullPath: '/api/articles'
+      preLoaderRoute: typeof ApiArticlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/customers': {
+      id: '/api/customers'
+      path: '/api/customers'
+      fullPath: '/api/customers'
+      preLoaderRoute: typeof ApiCustomersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/stats': {
+      id: '/api/stats'
+      path: '/api/stats'
+      fullPath: '/api/stats'
+      preLoaderRoute: typeof ApiStatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/tickets': {
+      id: '/api/tickets'
+      path: '/api/tickets'
+      fullPath: '/api/tickets'
+      preLoaderRoute: typeof ApiTicketsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/customers/': {
@@ -490,6 +720,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TicketsNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/agents/$id': {
+      id: '/api/agents/$id'
+      path: '/$id'
+      fullPath: '/api/agents/$id'
+      preLoaderRoute: typeof ApiAgentsIdRouteImport
+      parentRoute: typeof ApiAgentsRoute
+    }
+    '/api/articles/$id': {
+      id: '/api/articles/$id'
+      path: '/$id'
+      fullPath: '/api/articles/$id'
+      preLoaderRoute: typeof ApiArticlesIdRouteImport
+      parentRoute: typeof ApiArticlesRoute
+    }
+    '/api/customers/$id': {
+      id: '/api/customers/$id'
+      path: '/$id'
+      fullPath: '/api/customers/$id'
+      preLoaderRoute: typeof ApiCustomersIdRouteImport
+      parentRoute: typeof ApiCustomersRoute
+    }
+    '/api/sla/breaches': {
+      id: '/api/sla/breaches'
+      path: '/api/sla/breaches'
+      fullPath: '/api/sla/breaches'
+      preLoaderRoute: typeof ApiSlaBreachesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sla/policies': {
+      id: '/api/sla/policies'
+      path: '/api/sla/policies'
+      fullPath: '/api/sla/policies'
+      preLoaderRoute: typeof ApiSlaPoliciesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/tickets/$id': {
+      id: '/api/tickets/$id'
+      path: '/$id'
+      fullPath: '/api/tickets/$id'
+      preLoaderRoute: typeof ApiTicketsIdRouteImport
+      parentRoute: typeof ApiTicketsRoute
+    }
     '/customers/$id/': {
       id: '/customers/$id/'
       path: '/customers/$id'
@@ -532,12 +804,123 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TicketsIdEditRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/articles/$id/vote': {
+      id: '/api/articles/$id/vote'
+      path: '/vote'
+      fullPath: '/api/articles/$id/vote'
+      preLoaderRoute: typeof ApiArticlesIdVoteRouteImport
+      parentRoute: typeof ApiArticlesIdRoute
+    }
+    '/api/sla/policies/$id': {
+      id: '/api/sla/policies/$id'
+      path: '/$id'
+      fullPath: '/api/sla/policies/$id'
+      preLoaderRoute: typeof ApiSlaPoliciesIdRouteImport
+      parentRoute: typeof ApiSlaPoliciesRoute
+    }
+    '/api/tickets/$id/comments': {
+      id: '/api/tickets/$id/comments'
+      path: '/comments'
+      fullPath: '/api/tickets/$id/comments'
+      preLoaderRoute: typeof ApiTicketsIdCommentsRouteImport
+      parentRoute: typeof ApiTicketsIdRoute
+    }
   }
 }
+
+interface ApiAgentsRouteChildren {
+  ApiAgentsIdRoute: typeof ApiAgentsIdRoute
+}
+
+const ApiAgentsRouteChildren: ApiAgentsRouteChildren = {
+  ApiAgentsIdRoute: ApiAgentsIdRoute,
+}
+
+const ApiAgentsRouteWithChildren = ApiAgentsRoute._addFileChildren(
+  ApiAgentsRouteChildren,
+)
+
+interface ApiArticlesIdRouteChildren {
+  ApiArticlesIdVoteRoute: typeof ApiArticlesIdVoteRoute
+}
+
+const ApiArticlesIdRouteChildren: ApiArticlesIdRouteChildren = {
+  ApiArticlesIdVoteRoute: ApiArticlesIdVoteRoute,
+}
+
+const ApiArticlesIdRouteWithChildren = ApiArticlesIdRoute._addFileChildren(
+  ApiArticlesIdRouteChildren,
+)
+
+interface ApiArticlesRouteChildren {
+  ApiArticlesIdRoute: typeof ApiArticlesIdRouteWithChildren
+}
+
+const ApiArticlesRouteChildren: ApiArticlesRouteChildren = {
+  ApiArticlesIdRoute: ApiArticlesIdRouteWithChildren,
+}
+
+const ApiArticlesRouteWithChildren = ApiArticlesRoute._addFileChildren(
+  ApiArticlesRouteChildren,
+)
+
+interface ApiCustomersRouteChildren {
+  ApiCustomersIdRoute: typeof ApiCustomersIdRoute
+}
+
+const ApiCustomersRouteChildren: ApiCustomersRouteChildren = {
+  ApiCustomersIdRoute: ApiCustomersIdRoute,
+}
+
+const ApiCustomersRouteWithChildren = ApiCustomersRoute._addFileChildren(
+  ApiCustomersRouteChildren,
+)
+
+interface ApiTicketsIdRouteChildren {
+  ApiTicketsIdCommentsRoute: typeof ApiTicketsIdCommentsRoute
+}
+
+const ApiTicketsIdRouteChildren: ApiTicketsIdRouteChildren = {
+  ApiTicketsIdCommentsRoute: ApiTicketsIdCommentsRoute,
+}
+
+const ApiTicketsIdRouteWithChildren = ApiTicketsIdRoute._addFileChildren(
+  ApiTicketsIdRouteChildren,
+)
+
+interface ApiTicketsRouteChildren {
+  ApiTicketsIdRoute: typeof ApiTicketsIdRouteWithChildren
+}
+
+const ApiTicketsRouteChildren: ApiTicketsRouteChildren = {
+  ApiTicketsIdRoute: ApiTicketsIdRouteWithChildren,
+}
+
+const ApiTicketsRouteWithChildren = ApiTicketsRoute._addFileChildren(
+  ApiTicketsRouteChildren,
+)
+
+interface ApiSlaPoliciesRouteChildren {
+  ApiSlaPoliciesIdRoute: typeof ApiSlaPoliciesIdRoute
+}
+
+const ApiSlaPoliciesRouteChildren: ApiSlaPoliciesRouteChildren = {
+  ApiSlaPoliciesIdRoute: ApiSlaPoliciesIdRoute,
+}
+
+const ApiSlaPoliciesRouteWithChildren = ApiSlaPoliciesRoute._addFileChildren(
+  ApiSlaPoliciesRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ActivityLogRoute: ActivityLogRoute,
+  ApiActivityRoute: ApiActivityRoute,
+  ApiAgentsRoute: ApiAgentsRouteWithChildren,
+  ApiArticlesRoute: ApiArticlesRouteWithChildren,
+  ApiCustomersRoute: ApiCustomersRouteWithChildren,
+  ApiStatsRoute: ApiStatsRoute,
+  ApiTicketsRoute: ApiTicketsRouteWithChildren,
   CustomersNewRoute: CustomersNewRoute,
   DashboardAnalyticsRoute: DashboardAnalyticsRoute,
   KnowledgeBaseNewRoute: KnowledgeBaseNewRoute,
@@ -555,6 +938,8 @@ const rootRouteChildren: RootRouteChildren = {
   ReportsIndexRoute: ReportsIndexRoute,
   TeamIndexRoute: TeamIndexRoute,
   TicketsIndexRoute: TicketsIndexRoute,
+  ApiSlaBreachesRoute: ApiSlaBreachesRoute,
+  ApiSlaPoliciesRoute: ApiSlaPoliciesRouteWithChildren,
   CustomersIdEditRoute: CustomersIdEditRoute,
   KnowledgeBaseIdEditRoute: KnowledgeBaseIdEditRoute,
   TicketsIdEditRoute: TicketsIdEditRoute,
