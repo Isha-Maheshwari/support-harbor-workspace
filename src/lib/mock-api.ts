@@ -97,6 +97,7 @@ const tickets: Ticket[] = Array.from({ length: 84 }, (_, i) => {
     escalated, escalationReason: escalated ? pick(["Customer threatened churn", "SLA at risk", "Requires engineering", "Executive request"]) : undefined, comments,
   };
 });
+let nextTicketNumber = tickets.reduce((max, ticket) => Math.max(max, Number(ticket.id.slice(2))), 999) + 1;
 
 const categories = ["Getting Started", "Billing", "Integrations", "Troubleshooting", "Security", "API"];
 const articleTitles = ["How to reset your password", "Understanding your invoice", "Connecting Slack to SupportDesk", "Fixing webhook delivery delays", "Setting up SSO with Okta", "API rate limits explained", "Exporting data to CSV", "Enabling two-factor authentication", "Inviting teammates", "Bulk importing customers", "Troubleshooting mobile app crashes", "Refund and cancellation policy", "Configuring email forwarding", "Best practices for API keys"];
@@ -147,7 +148,7 @@ export const api = {
     (!f.customerId || t.customerId === f.customerId)).sort((a, b) => b.createdAt.localeCompare(a.createdAt))),
   getTicket: (id: string) => call(() => tickets.find((t) => t.id === id) ?? notFound("Ticket")),
   createTicket: (d: TicketInput) => call(() => {
-    const t: Ticket = { ...d, id: `T-${1000 + tickets.length}`, createdAt: now(), updatedAt: now(), dueAt: iso(Date.now() + slaHours[d.priority] * H), escalated: false, comments: [] };
+    const t: Ticket = { ...d, id: `T-${nextTicketNumber++}`, createdAt: now(), updatedAt: now(), dueAt: iso(Date.now() + slaHours[d.priority] * H), escalated: false, comments: [] };
     tickets.unshift(t); log("ticket", t.id, "created", `created ${t.id}`); return t;
   }),
   updateTicket: (id: string, d: Partial<Ticket>) => call(() => {
