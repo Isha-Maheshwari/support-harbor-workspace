@@ -25,6 +25,7 @@ export interface Article {
   id: string; title: string; category: string; body: string; status: "draft" | "published" | "archived";
   authorId: string; views: number; helpful: number; notHelpful: number; tags: string[]; updatedAt: string;
 }
+export type ArticleWithVote = Article & { currentUserVote: boolean | null };
 export interface SlaPolicy { id: string; name: string; priority: Priority; firstResponseMins: number; resolutionHours: number; active: boolean; }
 export interface Activity { id: string; actorId: string; action: string; entityType: "ticket" | "customer" | "article" | "sla"; entityId: string; message: string; createdAt: string; }
 
@@ -107,6 +108,11 @@ const articles: Article[] = articleTitles.map((title, i) => ({
   status: i % 7 === 6 ? "draft" : "published", authorId: pick(agents).id, views: Math.floor(r() * 5000),
   helpful: Math.floor(r() * 300), notHelpful: Math.floor(r() * 40), tags: [pick(tagPool)], updatedAt: iso(NOW - Math.floor(r() * 90) * 24 * H),
 }));
+const articleVotes = new Map<string, boolean>();
+const withCurrentVote = (article: Article): ArticleWithVote => ({
+  ...article,
+  currentUserVote: articleVotes.get(article.id) ?? null,
+});
 
 const slaPolicies: SlaPolicy[] = [
   { id: "sla1", name: "Urgent — Enterprise", priority: "urgent", firstResponseMins: 15, resolutionHours: 4, active: true },
@@ -169,10 +175,21 @@ export const api = {
   updateCustomer: (id: string, d: Partial<Customer>) => call(() => { const c = customers.find((x) => x.id === id) ?? notFound("Customer"); Object.assign(c, d); log("customer", id, "updated", `updated customer ${c.name}`); return c; }),
 
   listArticles: (q = "") => call(() => articles.filter((a) => `${a.title} ${a.category}`.toLowerCase().includes(q.toLowerCase()))),
-  getArticle: (id: string) => call(() => articles.find((a) => a.id === id) ?? notFound("Article")),
+  getArticle: (id: string) => call(() => withCurrentVote(articles.find((a) => a.id === id) ?? notFound("Article"))),
   createArticle: (d: ArticleInput) => call(() => { const a: Article = { ...d, id: `kb${articles.length + 1 + seq++}`, authorId: CURRENT_AGENT_ID, views: 0, helpful: 0, notHelpful: 0, updatedAt: now() }; articles.unshift(a); log("article", a.id, "created", `created article "${a.title}"`); return a; }),
   updateArticle: (id: string, d: Partial<Article>) => call(() => { const a = articles.find((x) => x.id === id) ?? notFound("Article"); Object.assign(a, d, { updatedAt: now() }); log("article", id, "updated", `updated article "${a.title}"`); return a; }),
-  voteArticle: (id: string, helpful: boolean) => call(() => { const a = articles.find((x) => x.id === id) ?? notFound("Article"); if (helpful) a.helpful++; else a.notHelpful++; return a; }),
+  voteArticle: (id: string, helpful: boolean) => call(() => {
+    const a = articles.find((x) => x.id === id) ?? notFound("Article");
+    const previousVote = articleVotes.get(id);
+    if (previousVote !== helpful) {
+      if (previousVote === true) a.helpful--;
+      if (previousVote === false) a.notHelpful--;
+      if (helpful) a.helpful++;
+      else a.notHelpful++;
+      articleVotes.set(id, helpful);
+    }
+    return withCurrentVote(a);
+  }),
 
   listAgents: () => call(() => agents),
   getAgent: (id: string) => call(() => agents.find((a) => a.id === id) ?? notFound("Agent")),
