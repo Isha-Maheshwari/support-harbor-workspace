@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { PageHeader, PriorityBadge, QueryBoundary } from "@/components/app/ui-bits";
+import { PageHeader, PriorityBadge, QueryBoundary, TableFrame } from "@/components/app/ui-bits";
 import { pageHead } from "@/lib/head";
 import { api, type SlaPolicy } from "@/lib/mock-api";
 import { useApiMutation, useSlaPolicies } from "@/lib/queries";
@@ -34,10 +34,10 @@ function Policies() {
       <PageHeader title="SLA policies" subtitle="Targets applied to tickets based on priority." />
       <QueryBoundary q={q}>
         {(list) => (
-          <div className="overflow-x-auto rounded-lg border bg-card shadow-card"><Table>
+          <TableFrame><Table>
             <TableHeader><TableRow><TableHead>Policy</TableHead><TableHead>Priority</TableHead><TableHead>First response (min)</TableHead><TableHead>Resolution (h)</TableHead><TableHead>Active</TableHead><TableHead /></TableRow></TableHeader>
             <TableBody>{list.map((p) => <Row key={`${p.id}-${p.firstResponseMins}-${p.resolutionHours}`} p={p} />)}</TableBody>
-          </Table></div>
+          </Table></TableFrame>
         )}
       </QueryBoundary>
     </>

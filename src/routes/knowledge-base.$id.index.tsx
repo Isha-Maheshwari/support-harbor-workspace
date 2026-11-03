@@ -37,8 +37,8 @@ function ArticleView() {
             <Markdown src={a.body} />
             <div className="mt-8 flex items-center gap-3 border-t pt-4 text-sm">
               <span className="text-muted-foreground">Was this helpful?</span>
-              <Button size="sm" variant="outline" disabled={vote.isPending} onClick={() => vote.mutate(true)}><ThumbsUp className="h-4 w-4" />{a.helpful}</Button>
-              <Button size="sm" variant="outline" disabled={vote.isPending} onClick={() => vote.mutate(false)}><ThumbsDown className="h-4 w-4" />{a.notHelpful}</Button>
+              <Button size="sm" variant="outline" aria-pressed={a.currentUserVote === true} className={a.currentUserVote === true ? "border-primary bg-primary/10 text-primary" : undefined} disabled={vote.isPending} onClick={() => vote.mutate(true)}><ThumbsUp className="h-4 w-4" />{a.helpful}</Button>
+              <Button size="sm" variant="outline" aria-pressed={a.currentUserVote === false} className={a.currentUserVote === false ? "border-primary bg-primary/10 text-primary" : undefined} disabled={vote.isPending} onClick={() => vote.mutate(false)}><ThumbsDown className="h-4 w-4" />{a.notHelpful}</Button>
             </div>
           </article>
         </>

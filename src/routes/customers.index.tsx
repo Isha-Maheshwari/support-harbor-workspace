@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { PageHeader, QueryBoundary, selectCls } from "@/components/app/ui-bits";
+import { PageHeader, QueryBoundary, selectCls, TableFrame } from "@/components/app/ui-bits";
 import { pageHead } from "@/lib/head";
 import { useCustomers } from "@/lib/queries";
 
@@ -23,7 +23,7 @@ function Customers() {
       </div>
       <QueryBoundary q={res} rows={10}>
         {(list) => (
-          <div className="overflow-x-auto rounded-lg border bg-card shadow-card"><Table>
+          <TableFrame><Table>
             <TableHeader><TableRow><TableHead>Name</TableHead><TableHead>Company</TableHead><TableHead>Email</TableHead><TableHead>Tier</TableHead><TableHead>Status</TableHead></TableRow></TableHeader>
             <TableBody>
               {list.filter((c) => tier === "all" || c.tier === tier).map((c) => (
@@ -35,7 +35,7 @@ function Customers() {
                 </TableRow>
               ))}
             </TableBody>
-          </Table></div>
+          </Table></TableFrame>
         )}
       </QueryBoundary>
     </>
